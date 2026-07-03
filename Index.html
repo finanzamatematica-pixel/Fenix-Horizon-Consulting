@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fenix Horizon Consulting — Formación inmobiliaria en directo</title>
+<meta name="description" content="Fenix Horizon Consulting, S.L.U. — formación educativa en directo para aprender a evaluar operaciones inmobiliarias. Con sede en Gran Canaria, España.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   FENIX HORIZON CONSULTING — design tokens
+   ============================================ */
+:root {
+  --ink: #16233F;
+  --ink-soft: #4C5568;
+  --paper: #F6F2E7;
+  --paper-dark: #EBE2CB;
+  --gold: #B08D57;
+  --gold-deep: #8C6D3F;
+  --teal: #1F4B49;
+  --teal-soft: #DCE7E4;
+  --white: #FFFFFF;
+  --line: rgba(22, 35, 63, 0.12);
+  --shadow: 0 24px 48px -24px rgba(22, 35, 63, 0.28);
+
+  --font-display: "Fraunces", "Iowan Old Style", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --container: 1120px;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: var(--teal); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2.5px solid var(--gold-deep);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.wrap {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  line-height: 1.08;
+  margin: 0 0 0.5em;
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: clamp(2.4rem, 4.4vw, 3.8rem); font-weight: 600; }
+h2 { font-size: clamp(1.7rem, 2.8vw, 2.35rem); font-weight: 600; }
+h3 { font-size: 1.25rem; font-weight: 600; }
+
+p { color: var(--ink-soft); margin: 0 0 1em; }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 18px;
+}
+.eyebrow::before {
+  content: "";
+  width: 20px;
+  height: 1.5px;
+  background: var(--gold);
+}
+
+/* ---------- header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(246, 242, 231, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+.logo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.logo span {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+nav.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+nav.main-nav a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+nav.main-nav a:hover { color: var(--teal); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 20px -8px rgba(22,35,63,0.4); }
+.btn-ghost {
+  border-color: var(--line);
+  color: var(--ink);
+  background: transparent;
+}
+.btn-ghost:hover { border-color: var(--ink); }
+
+/* ---------- hero ---------- */
+.hero {
+  padding: 88px 0 64px;
+}
+.hero .wrap {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: center;
+}
+.hero h1 { margin-bottom: 22px; }
+.hero .lede { font-size: 1.14rem; max-width: 46ch; margin-bottom: 32px; }
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* signature element: valuation scorecard */
+.scorecard {
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  position: relative;
+}
+.scorecard-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 22px;
+}
+.scorecard-head .tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  background: rgba(176, 141, 87, 0.12);
+  padding: 5px 10px;
+  border-radius: 999px;
+}
+.scorecard-head .addr {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  margin-top: 8px;
+}
+.gauge {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: conic-gradient(var(--gold) 0deg 245deg, var(--paper-dark) 245deg 360deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.gauge span {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--ink);
+}
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.metric-row:first-of-type { border-top: none; }
+.metric-row .label { font-size: 0.88rem; color: var(--ink-soft); }
+.metric-row .value { font-family: var(--font-mono); font-weight: 600; color: var(--ink); font-size: 0.95rem; }
+.metric-row .value.up { color: var(--teal); }
+.scorecard-foot {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ---------- sections ---------- */
+section { padding: 72px 0; }
+.section-alt { background: var(--paper-dark); }
+.section-head { max-width: 640px; margin-bottom: 44px; }
+.section-head p { font-size: 1.05rem; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 48px;
+  align-items: start;
+}
+.about-desc {
+  font-size: 1.15rem;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.step {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 30px 26px;
+}
+.step .num {
+  font-family: var(--font-mono);
+  color: var(--gold-deep);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+  display: block;
+}
+.step h3 { margin-bottom: 10px; }
+.step p { margin: 0; font-size: 0.96rem; }
+
+.disclaimer {
+  border: 1.5px solid var(--gold);
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: flex-start;
+}
+.disclaimer .mark {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.disclaimer p { margin: 0; color: var(--ink); font-size: 0.98rem; }
+.disclaimer strong { color: var(--ink); }
+
+.team {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 28px;
+  align-items: center;
+}
+.avatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal), var(--ink));
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.team h3 { margin-bottom: 4px; }
+.team .role { font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold-deep); margin-bottom: 10px; display: block; }
+
+.contact-panel {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--radius);
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+}
+.contact-panel h2 { color: var(--paper); }
+.contact-panel p { color: rgba(246,242,231,0.72); }
+.contact-panel .btn-primary { background: var(--gold); color: var(--ink); }
+.contact-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+.contact-list li { font-size: 0.95rem; border-top: 1px solid rgba(246,242,231,0.15); padding-top: 16px; }
+.contact-list li:first-child { border-top: none; padding-top: 0; }
+.contact-list .label { display: block; font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 4px; }
+.contact-list a { color: var(--paper); }
+
+/* ---------- footer ---------- */
+footer.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 40px 0;
+}
+footer.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.footer-legal {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  max-width: 480px;
+}
+.footer-legal strong { color: var(--ink); }
+.footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+.footer-links a { font-size: 0.86rem; color: var(--ink-soft); text-decoration: none; }
+.footer-links a:hover { color: var(--teal); }
+
+/* ---------- legal pages ---------- */
+.legal-page { padding: 64px 0 96px; }
+.legal-page .wrap { max-width: 780px; }
+.legal-page h1 { margin-bottom: 8px; }
+.legal-updated { font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-soft); margin-bottom: 40px; display: block; }
+.legal-page h2 { font-size: 1.25rem; margin-top: 2.2em; }
+.legal-page h3 { font-size: 1.02rem; margin-top: 1.6em; }
+.legal-page p, .legal-page li { color: var(--ink-soft); font-size: 0.98rem; }
+.legal-page ul { padding-left: 1.2em; }
+.legal-page table { width: 100%; border-collapse: collapse; margin: 1.4em 0; font-size: 0.9rem; }
+.legal-page th, .legal-page td { text-align: left; padding: 10px 12px; border: 1px solid var(--line); }
+.legal-page th { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; background: var(--paper-dark); }
+
+/* ---------- cookie banner ---------- */
+#cookie-banner {
+  position: fixed;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  z-index: 100;
+  max-width: 620px;
+  margin: 0 auto;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--radius);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.45);
+  padding: 24px 26px;
+  display: none;
+}
+#cookie-banner.show { display: block; }
+#cookie-banner p { color: rgba(246,242,231,0.82); font-size: 0.9rem; margin-bottom: 16px; }
+#cookie-banner a { color: var(--gold); }
+.cookie-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.cookie-actions button {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(246,242,231,0.3);
+  background: transparent;
+  color: var(--paper);
+  cursor: pointer;
+}
+.cookie-actions button.accept { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.cookie-actions button:hover { opacity: 0.9; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 860px) {
+  nav.main-nav { display: none; }
+  .hero .wrap { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .contact-panel { grid-template-columns: 1fr; padding: 32px 24px; }
+  .disclaimer { grid-template-columns: 1fr; }
+  .team { grid-template-columns: 1fr; text-align: left; }
+}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="logo">FENIX HORIZON<span>Consulting · Gran Canaria</span></a>
+    <nav class="main-nav">
+      <a href="#que-hacemos">Qué hacemos</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#contacto">Contacto</a>
+      <a href="aviso-legal.html">Aviso legal</a>
+    </nav>
+    <a href="#contacto" class="btn btn-primary">Contactar</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Formación inmobiliaria en directo · Gran Canaria</span>
+      <h1>Aprende a leer un inmueble antes de firmar nada.</h1>
+      <p class="lede">Sesiones de formación 1&nbsp;a&nbsp;1 con Fenix Horizon Consulting para entender cómo se valora una operación inmobiliaria y cómo funciona el proceso de compraventa, paso a paso, con un mentor en directo.</p>
+      <div class="hero-ctas">
+        <a href="#contacto" class="btn btn-primary">Reservar una sesión</a>
+        <a href="#como-funciona" class="btn btn-ghost">Cómo funciona</a>
+      </div>
+    </div>
+
+    <div class="scorecard" aria-hidden="true">
+      <div class="scorecard-head">
+        <div>
+          <span class="tag">Ficha de valoración</span>
+          <div class="addr">Ejemplo · Piso 3 hab., zona urbana</div>
+        </div>
+        <div class="gauge"><span>68/100</span></div>
+      </div>
+      <div class="metric-row">
+        <span class="label">Precio por m²</span>
+        <span class="value">2.340 €</span>
+      </div>
+      <div class="metric-row">
+        <span class="label">Rentabilidad estimada</span>
+        <span class="value up">4,8 %</span>
+      </div>
+      <div class="metric-row">
+        <span class="label">Estado de la operación</span>
+        <span class="value">A revisar</span>
+      </div>
+      <div class="metric-row">
+        <span class="label">Puntuación de ubicación</span>
+        <span class="value">Media-alta</span>
+      </div>
+      <div class="scorecard-foot">Ejemplo ilustrativo de lo que se aprende a construir durante la formación.</div>
+    </div>
+  </div>
+</section>
+
+<section id="que-hacemos">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="section-head" style="margin-bottom:0;">
+        <span class="eyebrow">Qué hacemos</span>
+        <h2>Formación, no gestión.</h2>
+      </div>
+      <div>
+        <p class="about-desc">Fenix Horizon Consulting, S.L.U. imparte formación con fines educativos en el sector inmobiliario, a través de sesiones en directo (llamada o videollamada) uno&nbsp;a&nbsp;uno. Nuestros clientes son personas particulares que quieren aprender, por su cuenta, a valorar una operación y a entender cómo se gestiona un proceso de compraventa.</p>
+        <p>El servicio se presta íntegramente en línea, desde nuestra sede en Gran Canaria, a clientes de toda la Unión Europea.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Cómo funciona</span>
+      <h2>Tres sesiones, un método claro.</h2>
+      <p>Cada proceso formativo sigue el mismo recorrido, adaptado al caso concreto que el cliente quiere entender.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="num">01</span>
+        <h3>Diagnóstico inicial</h3>
+        <p>Hablamos del caso que quieres entender: qué inmueble, qué dudas, qué decisión tienes por delante.</p>
+      </div>
+      <div class="step">
+        <span class="num">02</span>
+        <h3>Sesión de valoración en directo</h3>
+        <p>Construimos juntos, en llamada, los criterios para leer precio, estado y contexto de la operación.</p>
+      </div>
+      <div class="step">
+        <span class="num">03</span>
+        <h3>Plan de acción personalizado</h3>
+        <p>Sales con una guía clara de qué mirar, qué preguntar y qué pasos sigue un proceso de compraventa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="disclaimer">
+      <span class="mark">＊</span>
+      <p><strong>Aviso importante:</strong> Fenix Horizon Consulting, S.L.U. ofrece formación con fines exclusivamente educativos e informativos sobre el sector inmobiliario. No prestamos asesoramiento de inversión, no gestionamos operaciones de compraventa en nombre del cliente y no garantizamos resultado económico alguno. Las decisiones de compra, venta o inversión son siempre responsabilidad exclusiva del cliente.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="team">
+      <div class="avatar">MA</div>
+      <div>
+        <span class="role">Administrador</span>
+        <h3>Marco Amato</h3>
+        <p>Dirige Fenix Horizon Consulting, S.L.U. desde Gran Canaria, acompañando a cada cliente de forma directa y personal a lo largo de la formación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="contact-panel">
+      <div>
+        <h2>Hablemos de tu caso.</h2>
+        <p>Escríbenos y te contamos cómo funciona una sesión de formación adaptada a lo que necesitas entender.</p>
+        <a href="mailto:info@fenixhorizonconsulting.com" class="btn btn-primary">Escribir a Fenix Horizon</a>
+      </div>
+      <ul class="contact-list">
+        <li>
+          <span class="label">Email</span>
+          <a href="mailto:info@fenixhorizonconsulting.com">info@fenixhorizonconsulting.com</a>
+        </li>
+        <li>
+          <span class="label">Sede</span>
+          Av. Touroperador Neckermann, 3, 2ª Pta. 008<br>35100 San Bartolomé de Tirajana (Las Palmas), España
+        </li>
+        <li>
+          <span class="label">NIF</span>
+          B22897995
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="footer-legal"><strong>Fenix Horizon Consulting, S.L.U.</strong> — NIF B22897995<br>Av. Touroperador Neckermann, 3, 2ª Pta. 008, 35100 San Bartolomé de Tirajana (Las Palmas), España.</p>
+    <div class="footer-links">
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="cookies.html">Cookies</a>
+    </div>
+  </div>
+</footer>
+
+<div id="cookie-banner" role="dialog" aria-label="Aviso de cookies">
+  <p>Usamos cookies técnicas necesarias para el funcionamiento del sitio. Con tu permiso, también podríamos usar cookies analíticas. Puedes aceptar, rechazar o leer más en nuestra <a href="cookies.html">Política de Cookies</a>.</p>
+  <div class="cookie-actions">
+    <button id="cookie-accept" class="accept">Aceptar todas</button>
+    <button id="cookie-reject">Rechazar no esenciales</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = "fhc_cookie_consent"; // "accepted" | "rejected"
+  var banner = document.getElementById("cookie-banner");
+  if (!banner) return;
+
+  function getConsent() {
+    try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+  }
+  function setConsent(value) {
+    try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
+  }
+
+  function loadNonEssentialScripts() {
+    // Placeholder: only runs if the visitor accepts non-essential cookies.
+    // Add analytics / marketing script tags here when needed, e.g.:
+    // var s = document.createElement('script'); s.src = '...'; document.body.appendChild(s);
+    document.dispatchEvent(new CustomEvent("fhc:cookies-accepted"));
+  }
+
+  var existing = getConsent();
+  if (existing === "accepted") {
+    loadNonEssentialScripts();
+  } else if (!existing) {
+    banner.classList.add("show");
+  }
+
+  var acceptBtn = document.getElementById("cookie-accept");
+  var rejectBtn = document.getElementById("cookie-reject");
+
+  if (acceptBtn) {
+    acceptBtn.addEventListener("click", function () {
+      setConsent("accepted");
+      banner.classList.remove("show");
+      loadNonEssentialScripts();
+    });
+  }
+  if (rejectBtn) {
+    rejectBtn.addEventListener("click", function () {
+      setConsent("rejected");
+      banner.classList.remove("show");
+    });
+  }
+})();
+
+</script>
+</body>
+</html>
